@@ -52,15 +52,21 @@ func getSupportedTypes(creds core.BearerTokenAuthenticator) (globalsearchv2.Supp
 
 func main() {
 	creds := core.BearerTokenAuthenticator {
+		//BearerToken: "xxx",
 		BearerToken: "xxx",
 	}
 
-	result, err := getSupportedTypes(creds)
+	//result, err := getSupportedTypes(creds)
+	//if err != nil {
+	//	panic(err.Error())
+	//}
+	//
+	//for i:=0; i< len(result.SupportedTypes); i++ {
+	//	fmt.Printf("Type: %s \n", result.SupportedTypes[i])
+	//}
+
+	_, err := getResources(creds)
 	if err != nil {
 		panic(err.Error())
-	}
-
-	for i:=0; i< len(result.SupportedTypes); i++ {
-		fmt.Printf("Type: %s \n", result.SupportedTypes[i])
 	}
 }

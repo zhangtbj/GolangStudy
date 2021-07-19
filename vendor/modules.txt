@@ -1,0 +1,43 @@
+# github.com/IBM/go-sdk-core/v5 v5.5.1
+## explicit
+github.com/IBM/go-sdk-core/v5/core
+# github.com/IBM/platform-services-go-sdk v0.19.0
+## explicit
+github.com/IBM/platform-services-go-sdk/common
+github.com/IBM/platform-services-go-sdk/globalsearchv2
+github.com/IBM/platform-services-go-sdk/usagereportsv4
+# github.com/asaskevich/govalidator v0.0.0-20200907205600-7a23bdc65eef
+github.com/asaskevich/govalidator
+# github.com/form3tech-oss/jwt-go v3.2.2+incompatible
+github.com/form3tech-oss/jwt-go
+# github.com/go-openapi/errors v0.19.8
+github.com/go-openapi/errors
+# github.com/go-openapi/strfmt v0.20.1
+github.com/go-openapi/strfmt
+# github.com/go-playground/locales v0.13.0
+github.com/go-playground/locales
+github.com/go-playground/locales/currency
+# github.com/go-playground/universal-translator v0.17.0
+github.com/go-playground/universal-translator
+# github.com/go-stack/stack v1.8.0
+github.com/go-stack/stack
+# github.com/hashicorp/go-cleanhttp v0.5.1
+github.com/hashicorp/go-cleanhttp
+# github.com/hashicorp/go-retryablehttp v0.6.6
+github.com/hashicorp/go-retryablehttp
+# github.com/leodido/go-urn v1.2.0
+github.com/leodido/go-urn
+# github.com/mitchellh/mapstructure v1.3.3
+github.com/mitchellh/mapstructure
+# github.com/oklog/ulid v1.3.1
+github.com/oklog/ulid
+# go.mongodb.org/mongo-driver v1.5.1
+go.mongodb.org/mongo-driver/bson
+go.mongodb.org/mongo-driver/bson/bsoncodec
+go.mongodb.org/mongo-driver/bson/bsonoptions
+go.mongodb.org/mongo-driver/bson/bsonrw
+go.mongodb.org/mongo-driver/bson/bsontype
+go.mongodb.org/mongo-driver/bson/primitive
+go.mongodb.org/mongo-driver/x/bsonx/bsoncore
+# gopkg.in/go-playground/validator.v9 v9.31.0
+gopkg.in/go-playground/validator.v9
