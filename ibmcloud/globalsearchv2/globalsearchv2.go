@@ -15,10 +15,10 @@ func getResources(creds core.BearerTokenAuthenticator) (bool, error) {
 	)
 	searchOptions := globalSearch.NewSearchOptions()
 	searchOptions.SetLimit(1000)
-	searchOptions.SetQuery("type:resource-instance OR type:cf-application")
-	searchOptions.SetFields([]string{"name", "crn", "region", "tags", "service_name", "account_id", "type", "service_instance", "doc.resource_group_id"})
-	//searchOptions.SetQuery("*")
-	//searchOptions.SetFields([]string{"*"})
+	//searchOptions.SetQuery("type:resource-instance OR type:cf-application")
+	//searchOptions.SetFields([]string{"name", "crn", "region", "tags", "service_name", "account_id", "type", "service_instance", "doc.resource_group_id"})
+	searchOptions.SetQuery("*")
+	searchOptions.SetFields([]string{"*"})
 	scanResult, response, err := globalSearch.Search(searchOptions)
 	if err != nil {
 		return false, err
@@ -70,3 +70,4 @@ func main() {
 		panic(err.Error())
 	}
 }
+
