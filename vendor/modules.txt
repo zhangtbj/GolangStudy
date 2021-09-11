@@ -5,6 +5,7 @@ github.com/IBM/go-sdk-core/v5/core
 ## explicit
 github.com/IBM/platform-services-go-sdk/common
 github.com/IBM/platform-services-go-sdk/globalsearchv2
+github.com/IBM/platform-services-go-sdk/resourcecontrollerv2
 github.com/IBM/platform-services-go-sdk/usagereportsv4
 # github.com/asaskevich/govalidator v0.0.0-20200907205600-7a23bdc65eef
 github.com/asaskevich/govalidator

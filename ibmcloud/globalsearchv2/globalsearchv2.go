@@ -1,31 +1,65 @@
 package main
 
 import (
-	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/IBM/platform-services-go-sdk/globalsearchv2"
+	"strconv"
+)
+
+const (
+	globalSearchLimit              int64 = 1000
+	globalSearchQuery                    = "*"
 )
 
 func getResources(creds core.BearerTokenAuthenticator) (bool, error) {
+	authenticator := &core.BearerTokenAuthenticator{
+		BearerToken: creds.BearerToken,
+	}
 	globalSearch, err := globalsearchv2.NewGlobalSearchV2UsingExternalConfig(
 		&globalsearchv2.GlobalSearchV2Options{
-			Authenticator: &creds,
+			Authenticator: authenticator,
 		},
 	)
-	searchOptions := globalSearch.NewSearchOptions()
-	searchOptions.SetLimit(1000)
-	//searchOptions.SetQuery("type:resource-instance OR type:cf-application")
-	//searchOptions.SetFields([]string{"name", "crn", "region", "tags", "service_name", "account_id", "type", "service_instance", "doc.resource_group_id"})
-	searchOptions.SetQuery("*")
-	searchOptions.SetFields([]string{"*"})
-	scanResult, response, err := globalSearch.Search(searchOptions)
 	if err != nil {
 		return false, err
 	}
-	b, _ := json.MarshalIndent(scanResult, "", "  ")
-	fmt.Printf("\nSearch() result:\n%s\n", string(b))
-	fmt.Printf("\nSearch() response:\n%s\n", response.String())
+	searchOptions := globalSearch.NewSearchOptions()
+
+	s := ""
+	var searchCursor *string = &s
+	var allResources []globalsearchv2.ResultItem
+
+	for searchCursor != nil {
+		searchOptions.SetLimit(globalSearchLimit)
+		searchOptions.SetQuery(globalSearchQuery)
+		searchOptions.SetFields([]string{"*"})
+
+		if searchCursor != nil {
+			if *searchCursor != "" {
+				searchOptions.SetSearchCursor(*searchCursor)
+			}
+		} else {
+			break
+		}
+
+		scanResult, response, err := globalSearch.Search(searchOptions)
+		if err != nil {
+			return false, err
+		}
+
+		if response.StatusCode < 200 || response.StatusCode >= 300 {
+			return false, errors.New("the IBM Global Search API response is not successful, statusCode is "+
+				strconv.Itoa(response.StatusCode)+", result is "+response.GetResult().(string))
+		}
+
+		allResources = append(allResources, scanResult.Items...)
+		searchCursor = scanResult.SearchCursor
+	}
+
+	fmt.Printf("resource count is %d", len(allResources))
+
 	return true, nil
 }
 
@@ -52,7 +86,7 @@ func getSupportedTypes(creds core.BearerTokenAuthenticator) (globalsearchv2.Supp
 
 func main() {
 	creds := core.BearerTokenAuthenticator {
-		//BearerToken: "xxx",
+		// BearerToken: "xxx",
 		BearerToken: "xxx",
 	}
 
